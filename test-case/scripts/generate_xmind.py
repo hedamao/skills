@@ -228,8 +228,40 @@ def save_xmind(content, output_path):
         os.makedirs(output_dir, exist_ok=True)
 
     content_json = json.dumps(content, ensure_ascii=False, indent=2)
+
+    # 创建 manifest.json（必需文件）
+    manifest = {
+        "file-entries": {
+            "content.json": {},
+            "metadata.json": {},
+            "content.xml": {}
+        }
+    }
+    manifest_json = json.dumps(manifest, ensure_ascii=False, indent=2)
+
+    # 创建 metadata.json（必需文件，可为空对象）
+    metadata = {}
+    metadata_json = json.dumps(metadata, ensure_ascii=False)
+
+    # 获取 content.xml 模板（简化版，用于兼容旧版本）
+    content_xml = '''<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmap-content xmlns="urn:xmind:xmap:xmlns:content:2.0" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <sheet id="{sheet_id}" theme="0kdeemiijde6nuk97e4t0vpp54">
+    <topic id="{root_id}" structure-class="org.xmind.ui.map.unbalanced">
+      <title>{title}</title>
+    </topic>
+  </sheet>
+</xmap-content>'''.format(
+        sheet_id=content[0]["id"],
+        root_id=content[0]["rootTopic"]["id"],
+        title=content[0]["rootTopic"]["title"]
+    )
+
     with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("content.json", content_json)
+        zf.writestr("manifest.json", manifest_json)
+        zf.writestr("metadata.json", metadata_json)
+        zf.writestr("content.xml", content_xml)
     print(f"✅ XMind 文件已生成：{os.path.abspath(output_path)}")
 
 
