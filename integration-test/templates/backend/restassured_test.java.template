@@ -1,0 +1,300 @@
+package {{packageName}}.integration.api;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.{{containerType}};
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.*;
+
+/**
+ * {{entityName}} API 契约测试
+ *
+ * 使用 RestAssured 验证 REST API 的契约：
+ * - 状态码
+ * - Content-Type
+ * - 响应结构
+ * - 错误处理
+ */
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@DisplayName("{{entityName}} API 契约测试")
+class {{entityName}}ApiContractTest {
+
+    @LocalServerPort
+    private int port;
+
+    @Container
+    static {{containerType}}<?> {{containerName}} = new {{containerType}}<>("{{databaseImage}}")
+            .withDatabaseName("{{testDatabaseName}}")
+            .withUsername("{{testDbUser}}")
+            .withPassword("{{testDbPassword}}");
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", {{containerName}}::getJdbcUrl);
+        registry.add("spring.datasource.username", {{containerName}}::getUsername);
+        registry.add("spring.datasource.password", {{containerName}}::getPassword);
+    }
+
+    @BeforeEach
+    void setUp() {
+        RestAssured.port = port;
+        RestAssured.basePath = "{{apiBasePath}}";
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    }
+
+    // ==================== GET /{{apiResourcePath}}/{id} ====================
+
+    @Test
+    @DisplayName("GET /{{apiResourcePath}}/{id} - 正常返回符合契约")
+    void getById_Existing{{entityName}}_ReturnsValidContract() {
+        given()
+            .pathParam("id", {{existingId}})
+            .accept(ContentType.JSON)
+        .when()
+            .get("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(200)
+            .contentType(ContentType.JSON)
+            .body("id", equalTo({{existingId}}))
+            .body("{{primaryField}}", notNullValue())
+            .body("createdAt", notNullValue());
+    }
+
+    @Test
+    @DisplayName("GET /{{apiResourcePath}}/{id} - 不存在返回 404")
+    void getById_NonExisting{{entityName}}_Returns404() {
+        given()
+            .pathParam("id", {{nonExistingId}})
+        .when()
+            .get("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(404)
+            .body("errorCode", equalTo("{{errorCodeNotFound}}"))
+            .body("message", containsString("not found"));
+    }
+
+    @Test
+    @DisplayName("GET /{{apiResourcePath}}/{id} - 无效 ID 格式返回 400")
+    void getById_InvalidIdFormat_Returns400() {
+        given()
+            .pathParam("id", "invalid")
+        .when()
+            .get("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(400);
+    }
+
+    // ==================== GET /{{apiResourcePath}} ====================
+
+    @Test
+    @DisplayName("GET /{{apiResourcePath}} - 分页查询返回正确结构")
+    void list_WithPagination_ReturnsValidStructure() {
+        given()
+            .queryParam("page", 0)
+            .queryParam("size", 10)
+            .accept(ContentType.JSON)
+        .when()
+            .get("/{{apiResourcePath}}")
+        .then()
+            .statusCode(200)
+            .contentType(ContentType.JSON)
+            .body("content", isA(list()))
+            .body("pageable.pageNumber", equalTo(0))
+            .body("pageable.pageSize", equalTo(10))
+            .body("totalElements", greaterThanOrEqualTo(0))
+            .body("totalPages", greaterThanOrEqualTo(0));
+    }
+
+    @Test
+    @DisplayName("GET /{{apiResourcePath}} - 支持排序")
+    void list_WithSorting_ReturnsSortedResults() {
+        given()
+            .queryParam("sort", "{{primaryField}},desc")
+            .accept(ContentType.JSON)
+        .when()
+            .get("/{{apiResourcePath}}")
+        .then()
+            .statusCode(200)
+            .body("content", isA(list()));
+    }
+
+    // ==================== POST /{{apiResourcePath}} ====================
+
+    @Test
+    @DisplayName("POST /{{apiResourcePath}} - 成功创建返回 201")
+    void create_ValidRequest_Returns201() {
+        String requestBody = """
+            {
+                {{#each createFields}}
+                "{{this.fieldName}}": {{this.exampleValue}},
+                {{/each}}
+                "{{additionalField}}": "{{additionalFieldValue}}"
+            }
+            """;
+
+        given()
+            .body(requestBody)
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+        .when()
+            .post("/{{apiResourcePath}}")
+        .then()
+            .statusCode(201)
+            .body("id", notNullValue())
+            .body("{{primaryField}}", equalTo("{{primaryFieldValue}}"))
+            .header("Location", containsString("/{{apiResourcePath}}/"));
+    }
+
+    @Test
+    @DisplayName("POST /{{apiResourcePath}} - 请求参数校验失败返回 400")
+    void create_InvalidRequest_Returns400() {
+        String requestBody = """
+            {
+                {{#each invalidFields}}
+                "{{this.fieldName}}": {{this.invalidValue}},
+                {{/each}}
+            }
+            """;
+
+        given()
+            .body(requestBody)
+            .contentType(ContentType.JSON)
+        .when()
+            .post("/{{apiResourcePath}}")
+        .then()
+            .statusCode(400)
+            .body("validationErrors", hasSize(greaterThan(0)))
+            .body("message", containsString("validation"));
+    }
+
+    @Test
+    @DisplayName("POST /{{apiResourcePath}} - 重复数据返回 409")
+    void create_Duplicate{{uniqueField}}_Returns409() {
+        // 第一次创建
+        String requestBody = """
+            {
+                "{{uniqueField}}": "{{duplicateValue}}"
+            }
+            """;
+
+        given()
+            .body(requestBody)
+            .contentType(ContentType.JSON)
+        .when()
+            .post("/{{apiResourcePath}}")
+        .then()
+            .statusCode(anyOf(is(201), is(409))); // 可能已存在
+
+        // 第二次创建相同数据
+        given()
+            .body(requestBody)
+            .contentType(ContentType.JSON)
+        .when()
+            .post("/{{apiResourcePath}}")
+        .then()
+            .statusCode(409)
+            .body("errorCode", equalTo("DUPLICATE_{{uniqueField}}"));
+    }
+
+    // ==================== PUT /{{apiResourcePath}}/{id} ====================
+
+    @Test
+    @DisplayName("PUT /{{apiResourcePath}}/{id} - 成功更新返回 200")
+    void update_ValidRequest_Returns200() {
+        String requestBody = """
+            {
+                {{#each updateFields}}
+                "{{this.fieldName}}": {{this.updatedValue}},
+                {{/each}}
+            }
+            """;
+
+        given()
+            .pathParam("id", {{existingId}})
+            .body(requestBody)
+            .contentType(ContentType.JSON)
+            .accept(ContentType.JSON)
+        .when()
+            .put("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(200)
+            .body("id", equalTo({{existingId}}))
+            .body("{{updatedField}}", equalTo("{{updatedFieldValue}}"));
+    }
+
+    @Test
+    @DisplayName("PUT /{{apiResourcePath}}/{id} - 不存在的 ID 返回 404")
+    void update_NonExistingId_Returns404() {
+        String requestBody = """
+            {
+                "{{field}}": "value"
+            }
+            """;
+
+        given()
+            .pathParam("id", {{nonExistingId}})
+            .body(requestBody)
+            .contentType(ContentType.JSON)
+        .when()
+            .put("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(404);
+    }
+
+    // ==================== DELETE /{{apiResourcePath}}/{id} ====================
+
+    @Test
+    @DisplayName("DELETE /{{apiResourcePath}}/{id} - 成功删除返回 204")
+    void delete_ExistingId_Returns204() {
+        given()
+            .pathParam("id", {{existingId}})
+        .when()
+            .delete("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(204);
+    }
+
+    @Test
+    @DisplayName("DELETE /{{apiResourcePath}}/{id} - 不存在的 ID 返回 404")
+    void delete_NonExistingId_Returns404() {
+        given()
+            .pathParam("id", {{nonExistingId}})
+        .when()
+            .delete("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(404);
+    }
+
+    @Test
+    @DisplayName("DELETE /{{apiResourcePath}}/{id} - 删除后再次查询返回 404")
+    void delete_AfterDeletion_Returns404WhenQuery() {
+        Long id = {{existingId}};
+
+        // 删除
+        given()
+            .pathParam("id", id)
+        .when()
+            .delete("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(204);
+
+        // 验证已删除
+        given()
+            .pathParam("id", id)
+        .when()
+            .get("/{{apiResourcePath}}/{id}")
+        .then()
+            .statusCode(404);
+    }
+}

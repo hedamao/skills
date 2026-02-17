@@ -1,0 +1,263 @@
+package {{packageName}}.e2e;
+
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.LoadState;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.{{containerType}};
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.List;
+import java.util.Optional;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
+
+/**
+ * {{scenarioName}} E2E 测试
+ *
+ * 端到端测试，验证从用户操作到数据库落库的完整业务流程：
+ * {{#each testScenarios}}
+ * - {{this.description}}
+ * {{/each}}
+ *
+ * 技术栈：
+ * - 后端：@SpringBootTest + Testcontainers ({{databaseType}})
+ * - 前端：Playwright Java
+ * - 验证：HTTP 状态 + UI 渲染 + 数据库状态
+ */
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DisplayName("{{scenarioName}} E2E 测试")
+class {{scenarioClassName}}E2ETest {
+
+    @LocalServerPort
+    private int port;
+
+    @Container
+    static {{containerType}}<?> {{containerName}} = new {{containerType}}<>("{{databaseImage}}")
+            .withDatabaseName("{{testDatabaseName}}")
+            .withUsername("{{testDbUser}}")
+            .withPassword("{{testDbPassword}}");
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", {{containerName}}::getJdbcUrl);
+        registry.add("spring.datasource.username", {{containerName}}::getUsername);
+        registry.add("spring.datasource.password", {{containerName}}::getPassword);
+    }
+
+    static Page page;
+    static BrowserContext context;
+
+    @Autowired
+    private {{repositoryName}} {{repositoryVariable}};
+
+    private final String baseUrl = "http://localhost:" + port;
+
+    @BeforeAll
+    static void launchBrowser(Playwright playwright) {
+        Browser browser = playwright.chromium().launch(
+            new BrowserType.LaunchOptions()
+                .setHeadless(true)
+                .setSlowMo(0)
+        );
+        context = browser.newContext(
+            new Browser.NewContextOptions()
+                .setViewportSize(1280, 720)
+        );
+        page = context.newPage();
+    }
+
+    @BeforeEach
+    void setUp() {
+        context.clearCookies();
+        page.evaluate("() => localStorage.clear()");
+    }
+
+    // ==================== Happy Path 测试 ====================
+
+    {{#each happyPathTests}}
+    @Test
+    @Order({{this.order}})
+    @DisplayName("{{this.displayName}}")
+    void {{this.testName}}() {
+        // ====== Step {{this.stepNumber}}: {{this.stepDescription}} ======
+
+        // Arrange
+        {{#each this.arrangeSteps}}
+        // {{this.description}}
+        {{this.code}}
+        {{/each}}
+
+        // Act
+        {{#each this.actSteps}}
+        // {{this.description}}
+        {{this.pageClassName}} {{this.pageVariable}} = new {{this.pageClassName}}(page);
+        {{this.code}}
+        {{/each}}
+
+        // Assert
+        {{#each this.assertSteps}}
+        // {{this.description}}
+        {{this.code}}
+        {{/each}}
+    }
+    {{/each}}
+
+    // ==================== 完整流程测试 ====================
+
+    @Test
+    @Order(100)
+    @DisplayName("完整流程：{{fullScenarioDescription}}")
+    void completeFlow_{{fullScenarioName}}_Success() {
+        // ====== Step 1: {{step1Description}} ======
+        page.navigate(baseUrl + "{{step1Path}}");
+
+        {{step1PageClass}} step1Page = new {{step1PageClass}}(page);
+        step1Page.{{step1ActionChain}};
+
+        // 验证结果
+        assertThat(page.locator("{{step1SuccessSelector}}")).isVisible();
+
+        // ====== Step 2: {{step2Description}} ======
+        page.navigate(baseUrl + "{{step2Path}}");
+
+        {{step2PageClass}} step2Page = new {{step2PageClass}}(page);
+        step2Page.{{step2ActionChain}};
+
+        // 验证结果
+        assertThat(page.locator("{{step2SuccessSelector}}")).isVisible();
+
+        // ====== Step 3: {{step3Description}} ======
+        page.navigate(baseUrl + "{{step3Path}}");
+
+        {{step3PageClass}} step3Page = new {{step3PageClass}}(page);
+        step3Page.{{step3ActionChain}};
+
+        // 验证结果
+        assertThat(page.locator("{{step3SuccessSelector}}")).isVisible();
+
+        // ====== Step 4: 验证数据库状态 ======
+        {{#each dbVerificationSteps}}
+        {{this.code}}
+        {{/each}}
+    }
+
+    // ==================== 异常流程测试 ====================
+
+    {{#each errorPathTests}}
+    @Test
+    @Order({{this.order}})
+    @DisplayName("{{this.displayName}}")
+    void {{this.testName}}() {
+        // Arrange
+        {{#each this.arrangeSteps}}
+        {{this.code}}
+        {{/each}}
+
+        // Act
+        {{#each this.actSteps}}
+        {{this.pageClassName}} {{this.pageVariable}} = new {{this.pageClassName}}(page);
+        {{this.code}}
+        {{/each}}
+
+        // Assert - 验证错误处理
+        {{#each this.assertSteps}}
+        assertThat(page.locator("{{this.errorSelector}}")).isVisible();
+        assertThat(page.locator("{{this.errorSelector}}").textContent())
+            .contains("{{this.expectedErrorMessage}}");
+        {{/each}}
+
+        // Assert - 验证数据库状态未变
+        {{#each this.dbVerifySteps}}
+        {{this.code}}
+        {{/each}}
+    }
+    {{/each}}
+
+    // ==================== 权限流程测试 ====================
+
+    {{#each authTests}}
+    @Test
+    @Order({{this.order}})
+    @DisplayName("{{this.displayName}}")
+    void {{this.testName}}() {
+        // Arrange
+        {{#each this.arrangeSteps}}
+        {{this.code}}
+        {{/each}}
+
+        // Act
+        page.navigate(baseUrl + "{{this.protectedPath}}");
+
+        // Assert
+        {{#each this.assertSteps}}
+        {{this.code}}
+        {{/each}}
+    }
+    {{/each}}
+
+    // ==================== 数据一致性测试 ====================
+
+    @Test
+    @Order(200)
+    @DisplayName("数据流转：{{dataFlowDescription}}")
+    void dataFlow_{{dataFlowName}}_VerifiesConsistency() {
+        // Arrange - 准备初始数据
+        {{initialDataCode}}
+
+        // Act - 执行操作
+        page.navigate(baseUrl + "{{actionPath}}");
+
+        {{actionPageClass}} actionPage = new {{actionPageClass}}(page);
+        actionPage.{{actionChain}};
+
+        // Assert - 验证跨模块数据一致性
+        {{#each consistencyChecks}}
+        // {{this.description}}
+        {{this.code}}
+        {{/each}}
+    }
+
+    // ==================== 性能测试 ====================
+
+    @Test
+    @Order(300)
+    @DisplayName("性能：关键流程响应时间在合理范围内")
+    void performance_KeyFlow_CompletesWithinReasonableTime() {
+        long startTime = System.currentTimeMillis();
+
+        // 执行关键流程
+        page.navigate(baseUrl + "{{startPath}}");
+
+        {{#each performanceSteps}}
+        new {{this.pageClass}}(page).{{this.actionChain}};
+        {{/each}}
+
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+
+        // 断言：整个流程应在 {{maxDuration}} 毫秒内完成
+        assertThat(duration)
+            .as("流程执行时间: %d ms", duration)
+            .isLessThan({{maxDuration}});
+    }
+
+    @AfterAll
+    static void closeBrowser() {
+        if (context != null) {
+            context.close();
+        }
+    }
+}

@@ -1,0 +1,200 @@
+package {{packageName}}.integration.ui;
+
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.LoadState;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.{{containerType}};
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
+
+/**
+ * {{pageDescription}} UI 测试
+ *
+ * 使用 Playwright Java 进行前端 UI 自动化测试：
+ * - 页面导航
+ * - 表单交互
+ * - 元素断言
+ * - 用户流程验证
+ */
+@ExtendWith(PlaywrightExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@DisplayName("{{pageDescription}} UI 测试")
+class {{pageClassName}}UITest {
+
+    @LocalServerPort
+    private int port;
+
+    @Container
+    static {{containerType}}<?> {{containerName}} = new {{containerType}}<>("{{databaseImage}}")
+            .withDatabaseName("{{testDatabaseName}}")
+            .withUsername("{{testDbUser}}")
+            .withPassword("{{testDbPassword}}");
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", {{containerName}}::getJdbcUrl);
+        registry.add("spring.datasource.username", {{containerName}}::getUsername);
+        registry.add("spring.datasource.password", {{containerName}}::getPassword);
+    }
+
+    static Page page;
+    static BrowserContext context;
+
+    @BeforeAll
+    static void launchBrowser(Playwright playwright) {
+        Browser browser = playwright.chromium().launch(
+            new BrowserType.LaunchOptions()
+                .setHeadless(true)
+                .setSlowMo(0) // 设置为 100 可以慢速执行，便于调试
+        );
+        context = browser.newContext(
+            new Browser.NewContextOptions()
+                .setViewportSize(1280, 720)
+        );
+        page = context.newPage();
+    }
+
+    @BeforeEach
+    void setUp() {
+        // 每个测试前清空 Cookies 和 LocalStorage
+        context.clearCookies();
+        page.evaluate("() => localStorage.clear()");
+    }
+
+    // ==================== 正常流程测试 ====================
+
+    {{#each happyPathTests}}
+    @Test
+    @DisplayName("{{this.displayName}}")
+    void {{this.testName}}() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port;
+        page.navigate(baseUrl + "{{this.path}}");
+
+        // Act
+        {{this.pageClassName}} {{this.pageVariable}} = new {{this.pageClassName}}(page);
+        {{this.actions}}
+
+        // Assert
+        {{this.assertions}}
+    }
+    {{/each}}
+
+    // ==================== 表单验证测试 ====================
+
+    {{#each validationTests}}
+    @Test
+    @DisplayName("{{this.displayName}}")
+    void {{this.testName}}() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port;
+        page.navigate(baseUrl + "{{this.path}}");
+
+        // Act
+        {{this.pageClassName}} {{this.pageVariable}} = new {{this.pageClassName}}(page);
+        {{this.actions}}
+
+        // Assert - 验证错误消息显示
+        assertThat(page.locator("{{this.errorSelector}}")).isVisible();
+        assertThat(page.locator("{{this.errorSelector}}").textContent())
+            .contains("{{this.errorMessage}}");
+    }
+    {{/each}}
+
+    // ==================== 异常流程测试 ====================
+
+    {{#each errorTests}}
+    @Test
+    @DisplayName("{{this.displayName}}")
+    void {{this.testName}}() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port;
+        page.navigate(baseUrl + "{{this.path}}");
+
+        // Act
+        {{this.pageClassName}} {{this.pageVariable}} = new {{this.pageClassName}}(page);
+        {{this.actions}}
+
+        // Assert - 验证错误处理
+        {{this.assertions}}
+    }
+    {{/each}}
+
+    // ==================== 页面元素测试 ====================
+
+    @Test
+    @DisplayName("页面加载：所有关键元素都存在")
+    void pageLoad_AllKeyElementsPresent() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port;
+
+        // Act
+        page.navigate(baseUrl + "{{pagePath}}");
+
+        // Assert - 验证页面标题
+        assertThat(page).hasTitle("{{expectedTitle}}");
+
+        // Assert - 验证关键元素存在
+        {{#each keyElements}}
+        assertThat(page.locator("{{this.selector}}")).isVisible();
+        {{/each}}
+    }
+
+    @Test
+    @DisplayName("响应式设计：在移动端视图下正常显示")
+    void responsiveDesign_MobileView_DisplaysCorrectly() {
+        // Arrange - 设置移动端视口
+        context.setExtraHTTPHeaders(java.util.Map.of("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)"));
+        page.setViewportSize(375, 667);
+
+        String baseUrl = "http://localhost:" + port;
+
+        // Act
+        page.navigate(baseUrl + "{{pagePath}}");
+
+        // Assert - 验证移动端菜单按钮显示
+        assertThat(page.locator(".mobile-menu-button")).isVisible();
+    }
+
+    // ==================== 性能测试 ====================
+
+    @Test
+    @DisplayName("页面性能：页面加载时间在合理范围内")
+    void pagePerformance_LoadsWithinReasonableTime() {
+        // Arrange
+        String baseUrl = "http://localhost:" + port;
+        long startTime = System.currentTimeMillis();
+
+        // Act
+        page.navigate(baseUrl + "{{pagePath}}");
+
+        // 等待页面完全加载
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+
+        long endTime = System.currentTimeMillis();
+        long loadTime = endTime - startTime;
+
+        // Assert - 页面加载时间应小于 3 秒
+        assertThat(loadTime).isLessThan(3000);
+    }
+
+    @AfterAll
+    static void closeBrowser() {
+        if (context != null) {
+            context.close();
+        }
+    }
+}

@@ -1,0 +1,356 @@
+package {{packageName}}.integration.ui.pages;
+
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.options.LoadState;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+/**
+ * Page Object for: {{pageName}}
+ *
+ * Description: {{pageDescription}}
+ *
+ * 页面元素定位器统一管理，支持流式接口调用
+ *
+ * 使用示例：
+ * <pre>
+ * LoginPage loginPage = new LoginPage(page);
+ * loginPage.enterUsername("testuser")
+ *          .enterPassword("password123")
+ *          .clickLogin();
+ * </pre>
+ */
+public class {{pageClassName}} {
+
+    private final Page page;
+
+    // ==================== 页面元素定位器 ====================
+
+    {{#each pageElements}}
+    /** {{this.description}} */
+    private static final String {{this.constantName}} = "{{this.selector}}";
+    {{/each}}
+
+    // ==================== 页面 URL ====================
+
+    private static final String PAGE_URL = "{{pageUrl}}";
+
+    // ==================== 构造函数 ====================
+
+    /**
+     * 创建 Page Object 实例
+     *
+     * @param page Playwright Page 对象
+     */
+    public {{pageClassName}}(Page page) {
+        this.page = page;
+        // 等待页面关键元素出现，确保页面已加载
+        page.waitForSelector({{mainElementSelector}});
+    }
+
+    /**
+     * 导航到此页面
+     *
+     * @param baseUrl 基础 URL (如: http://localhost:8080)
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} navigate(String baseUrl) {
+        page.navigate(baseUrl + PAGE_URL);
+        page.waitForLoadState(LoadState.DOMCONTENTLOADED);
+        return this;
+    }
+
+    /**
+     * 导航到此页面并等待网络空闲
+     *
+     * @param baseUrl 基础 URL
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} navigateAndWait(String baseUrl) {
+        page.navigate(baseUrl + PAGE_URL);
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        return this;
+    }
+
+    // ==================== 表单输入方法 ====================
+
+    {{#each inputFields}}
+    /**
+     * 输入{{this.label}}
+     *
+     * @param value 输入值
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} enter{{this.methodSuffix}}(String value) {
+        page.fill({{this.selector}}, value);
+        return this;
+    }
+
+    /**
+     * 清空{{this.label}}
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} clear{{this.methodSuffix}}() {
+        page.fill({{this.selector}}, "");
+        return this;
+    }
+
+    /**
+     * 获取{{this.label}}的值
+     *
+     * @return 当前输入值
+     */
+    public String get{{this.methodSuffix}}() {
+        return page.inputValue({{this.selector}});
+    }
+    {{/each}}
+
+    // ==================== 选择框/下拉框方法 ====================
+
+    {{#each selectFields}}
+    /**
+     * 选择{{this.label}}
+     *
+     * @param value 选项值
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} select{{this.methodSuffix}}(String value) {
+        page.selectOption({{this.selector}}, value);
+        return this;
+    }
+
+    /**
+     * 获取{{this.label}}的选中值
+     *
+     * @return 当前选中的值
+     */
+    public String getSelected{{this.methodSuffix}}() {
+        return page.inputValue({{this.selector}});
+    }
+    {{/each}}
+
+    // ==================== 复选框/单选框方法 ====================
+
+    {{#each checkboxFields}}
+    /**
+     * 勾选{{this.label}}
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} check{{this.methodSuffix}}() {
+        page.check({{this.selector}});
+        return this;
+    }
+
+    /**
+     * 取消勾选{{this.label}}
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} uncheck{{this.methodSuffix}}() {
+        page.uncheck({{this.selector}});
+        return this;
+    }
+
+    /**
+     * 判断{{this.label}}是否被勾选
+     *
+     * @return true 如果已勾选
+     */
+    public boolean is{{this.methodSuffix}}Checked() {
+        return page.isChecked({{this.selector}});
+    }
+    {{/each}}
+
+    // ==================== 按钮点击方法 ====================
+
+    {{#each buttonFields}}
+    /**
+     * 点击{{this.label}}
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} click{{this.methodSuffix}}() {
+        page.click({{this.selector}});
+        return this;
+    }
+
+    /**
+     * 双击{{this.label}}
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} doubleClick{{this.methodSuffix}}() {
+        page.dblclick({{this.selector}});
+        return this;
+    }
+    {{/each}}
+
+    // ==================== 断言辅助方法 ====================
+
+    /**
+     * 断言当前在正确的页面上
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} assertOnPage() {
+        assertThat(page.locator({{mainElementSelector}})).isVisible();
+        return this;
+    }
+
+    /**
+     * 断言页面标题包含指定文本
+     *
+     * @param expectedTitle 期望的标题文本
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} assertTitleContains(String expectedTitle) {
+        assertThat(page).hasTitle(java.util.function.Predicate.not(
+            title -> title == null || !title.contains(expectedTitle)
+        ));
+        return this;
+    }
+
+    /**
+     * 断言元素可见
+     *
+     * @param selector 元素选择器
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} assertElementVisible(String selector) {
+        assertThat(page.locator(selector)).isVisible();
+        return this;
+    }
+
+    /**
+     * 断言元素包含指定文本
+     *
+     * @param selector 元素选择器
+     * @param expectedText 期望的文本
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} assertElementContainsText(String selector, String expectedText) {
+        assertThat(page.locator(selector)).containsText(expectedText);
+        return this;
+    }
+
+    /**
+     * 断言错误消息显示
+     *
+     * @param expectedErrorMessage 期望的错误消息
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} assertErrorMessageShown(String expectedErrorMessage) {
+        assertThat(page.locator("{{errorSelector}}")).isVisible();
+        assertThat(page.locator("{{errorSelector}}").textContent())
+            .contains(expectedErrorMessage);
+        return this;
+    }
+
+    /**
+     * 断言成功消息显示
+     *
+     * @param expectedSuccessMessage 期望的成功消息
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} assertSuccessMessageShown(String expectedSuccessMessage) {
+        assertThat(page.locator("{{successSelector}}")).isVisible();
+        assertThat(page.locator("{{successSelector}}").textContent())
+            .contains(expectedSuccessMessage);
+        return this;
+    }
+
+    // ==================== 元素访问器 ====================
+
+    {{#each elementAccessors}}
+    /**
+     * 获取{{this.description}}的 Locator
+     *
+     * @return Playwright Locator 对象
+     */
+    public Locator {{this.methodSuffix}}() {
+        return page.locator({{this.selector}});
+    }
+
+    /**
+     * 获取{{this.description}}的文本内容
+     *
+     * @return 元素的文本内容
+     */
+    public String get{{this.methodSuffix}}Text() {
+        return page.locator({{this.selector}}).textContent();
+    }
+
+    /**
+     * 判断{{this.description}}是否可见
+     *
+     * @return true 如果元素可见
+     */
+    public boolean is{{this.methodSuffix}}Visible() {
+        return page.locator({{this.selector}}).isVisible();
+    }
+    {{/each}}
+
+    // ==================== 自定义操作方法 ====================
+
+    {{#each customActions}}
+    /**
+     * {{this.description}}
+     *
+     * {{#each this.params}}
+     * @param {{this.name}} {{this.description}}
+     * {{/each}}
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} {{this.methodName}}({{this.paramString}}) {
+        {{this.code}}
+        return this;
+    }
+    {{/each}}
+
+    // ==================== 等待方法 ====================
+
+    /**
+     * 等待指定选择器的元素出现
+     *
+     * @param selector CSS 选择器
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} waitForElement(String selector) {
+        page.waitForSelector(selector);
+        return this;
+    }
+
+    /**
+     * 等待指定选择器的元素隐藏
+     *
+     * @param selector CSS 选择器
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} waitForElementHidden(String selector) {
+        page.waitForSelector(selector, new Page.WaitForSelectorOptions().setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
+        return this;
+    }
+
+    /**
+     * 等待页面导航完成
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} waitForNavigation() {
+        page.waitForLoadState(LoadState.LOAD);
+        return this;
+    }
+
+    /**
+     * 等待网络空闲（所有请求完成）
+     *
+     * @return 当前 Page Object 实例（流式接口）
+     */
+    public {{pageClassName}} waitForNetworkIdle() {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        return this;
+    }
+}

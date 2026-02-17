@@ -1,0 +1,153 @@
+package {{packageName}}.integration.backend;
+
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.{{containerType}};
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.*;
+
+/**
+ * {{entityName}} 后端集成测试
+ *
+ * 使用 Testcontainers 提供真实 {{databaseType}} 数据库环境
+ * 验证 Service 层与数据库的交互、事务行为
+ */
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Testcontainers
+@DisplayName("{{entityName}} 模块后端集成测试")
+class {{entityName}}BackendIntegrationTest {
+
+    @Container
+    static {{containerType}}<?> {{containerName}} = new {{containerType}}<>("{{databaseImage}}")
+            .withDatabaseName("{{testDatabaseName}}")
+            .withUsername("{{testDbUser}}")
+            .withPassword("{{testDbPassword}}");
+
+    @DynamicPropertySource
+    static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", {{containerName}}::getJdbcUrl);
+        registry.add("spring.datasource.username", {{containerName}}::getUsername);
+        registry.add("spring.datasource.password", {{containerName}}::getPassword);
+    }
+
+    @Autowired
+    private {{serviceName}} {{serviceVariable}};
+
+    @Autowired
+    private {{repositoryName}} {{repositoryVariable}};
+
+    @Test
+    @DisplayName("创建{{entityName}}：数据正确落库")
+    void create{{entityName}}_ValidData_PersistsToDatabase() {
+        // Arrange (准备)
+        {{entityName}}CreateRequest request = new {{entityName}}CreateRequest();
+        {{#each requestFields}}
+        request.set{{this.name}}({{this.value}});{{/each}}
+
+        // Act (执行)
+        {{entityName}}DTO result = {{serviceVariable}}.create{{entityName}}(request);
+
+        // Assert (断言)
+        assertThat(result.getId()).isNotNull();
+        assertThat(result.get{{primaryField}}()).isEqualTo({{primaryFieldValue}});
+
+        // 验证数据库
+        Optional<{{entityName}}Entity> persisted = {{repositoryVariable}}.findById(result.getId());
+        assertThat(persisted).isPresent();
+        assertThat(persisted.get().get{{primaryField}}()).isEqualTo({{primaryFieldValue}});
+    }
+
+    @Test
+    @DisplayName("查询{{entityName}}：根据 ID 查询存在的数据")
+    void findById_DataExists_Returns{{entityName}}() {
+        // Arrange
+        {{entityName}}Entity entity = new {{entityName}}Entity();
+        entity.set{{primaryField}}({{primaryFieldValue}});
+        {{entityName}}Entity saved = {{repositoryVariable}}.save(entity);
+
+        // Act
+        {{entityName}}DTO result = {{serviceVariable}}.findById(saved.getId());
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result.getId()).isEqualTo(saved.getId());
+    }
+
+    @Test
+    @DisplayName("查询{{entityName}}：查询不存在的数据抛出异常")
+    void findById_DataNotFound_Throws{{notFoundException}}() {
+        // Arrange
+        Long nonExistentId = 99999L;
+
+        // Act & Assert
+        assertThatThrownBy(() -> {{serviceVariable}}.findById(nonExistentId))
+            .isInstanceOf({{notFoundException}}.class)
+            .hasMessageContaining("not found");
+    }
+
+    @Test
+    @DisplayName("事务回滚：业务异常时数据不会被持久化")
+    void create{{entityName}}_BusinessException_RollbacksTransaction() {
+        // Arrange - 构造触发业务异常的请求
+        {{entityName}}CreateRequest request = new {{entityName}}CreateRequest();
+        {{#each requestFields}}
+        request.set{{this.name}}({{this.value}});{{/each}}
+
+        long countBefore = {{repositoryVariable}}.count();
+
+        // Act & Assert
+        assertThatThrownBy(() -> {{serviceVariable}}.create{{entityName}}(request))
+            .isInstanceOf({{businessException}}.class);
+
+        // 事务回滚，数据量应不变
+        long countAfter = {{repositoryVariable}}.count();
+        assertThat(countAfter).isEqualTo(countBefore);
+    }
+
+    @Test
+    @DisplayName("更新{{entityName}}：数据正确更新到数据库")
+    void update{{entityName}}_ValidData_UpdatesDatabase() {
+        // Arrange - 先创建一条数据
+        {{entityName}}Entity entity = new {{entityName}}Entity();
+        entity.set{{primaryField}}("original_value");
+        {{entityName}}Entity saved = {{repositoryVariable}}.save(entity);
+
+        {{entityName}}UpdateRequest request = new {{entityName}}UpdateRequest();
+        {{#each updateFields}}
+        request.set{{this.name}}({{this.value}});{{/each}}
+
+        // Act
+        {{entityName}}DTO result = {{serviceVariable}}.update{{entityName}}(saved.getId(), request);
+
+        // Assert
+        assertThat(result.get{{updateField}}()).isEqualTo({{updateFieldValue}});
+
+        // 验证数据库
+        {{entityName}}Entity updated = {{repositoryVariable}}.findById(saved.getId()).orElseThrow();
+        assertThat(updated.get{{updateField}}()).isEqualTo({{updateFieldValue}});
+    }
+
+    @Test
+    @DisplayName("删除{{entityName}}：数据从数据库中删除")
+    void delete{{entityName}}_ExistingId_RemovesFromDatabase() {
+        // Arrange - 先创建一条数据
+        {{entityName}}Entity entity = new {{entityName}}Entity();
+        entity.set{{primaryField}}({{primaryFieldValue}});
+        {{entityName}}Entity saved = {{repositoryVariable}}.save(entity);
+
+        // Act
+        {{serviceVariable}}.delete{{entityName}}(saved.getId());
+
+        // Assert
+        Optional<{{entityName}}Entity> deleted = {{repositoryVariable}}.findById(saved.getId());
+        assertThat(deleted).isEmpty();
+    }
+}
