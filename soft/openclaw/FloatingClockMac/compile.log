@@ -1,0 +1,1111 @@
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:9: note: while building module 'Foundation' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:
+10 | */
+11 | 
+12 | #import <Foundation/Foundation.h>
+   |         `- note: while building module 'Foundation' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:
+13 | #import <AppKit/AppKit.h>
+14 | #import <CoreData/CoreData.h>
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Foundation.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/NSDebug.h"
+3 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:9: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:
+ 92 | #import <Foundation/NSURLCredential.h>
+ 93 | #import <Foundation/NSURLCredentialStorage.h>
+ 94 | #import <Foundation/NSURLError.h>
+    |         `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:
+ 95 | #import <Foundation/NSURLProtectionSpace.h>
+ 96 | #import <Foundation/NSURLProtocol.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSURLError.h:15:9: error: could not build module 'CoreServices'
+ 13 | #endif
+ 14 | #else
+ 15 | #import <CoreServices/CoreServices.h>
+    |         `- error: could not build module 'CoreServices'
+ 16 | #endif
+ 17 | 
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Cocoa.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:12:9: error: could not build module 'Foundation'
+10 | */
+11 | 
+12 | #import <Foundation/Foundation.h>
+   |         `- error: could not build module 'Foundation'
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/AppKit.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/NSNibConnector.h"
+3 | #import "Headers/NSNibControlConnector.h"
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.h:10:9: error: could not build module 'Foundation'
+  8 | */
+  9 | 
+ 10 | #import <Foundation/Foundation.h>
+    |         `- error: could not build module 'Foundation'
+ 11 | #import <AppKit/AppKitDefines.h>
+ 12 | #import <AppKit/AppKitErrors.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSEvent.h:10:9: note: while building module 'ApplicationServices' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSEvent.h:10:
+  8 | #import <AppKit/NSTouch.h>
+  9 | #import <AppKit/AppKitDefines.h>
+ 10 | #import <ApplicationServices/ApplicationServices.h>
+    |         `- note: while building module 'ApplicationServices' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSEvent.h:10:
+ 11 | #import <Foundation/NSObjCRuntime.h>
+ 12 | #import <Foundation/NSObject.h>
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/ApplicationServices.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Frameworks/ATS.framework/Headers/ATS.h"
+3 | #import "Frameworks/ATSUI.framework/Headers/ATSUnicode.h"
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.h:23:10: error: could not build module 'CoreServices'
+21 | 
+22 | #ifndef __CORESERVICES__
+23 | #include <CoreServices/CoreServices.h>
+   |          `- error: could not build module 'CoreServices'
+24 | #endif
+25 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSKeyValueBinding.h:12:9: note: while building module 'CoreData' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSKeyValueBinding.h:12:
+ 10 | #import <Foundation/NSArray.h>
+ 11 | #import <Foundation/NSDictionary.h>
+ 12 | #import <CoreData/NSManagedObjectContext.h>
+    |         `- note: while building module 'CoreData' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSKeyValueBinding.h:12:
+ 13 | 
+ 14 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/CoreData.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CoreData_CloudKit.h"
+3 | #import "Headers/NSPersistentCloudKitContainer_Sharing.h"
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h:8:9: error: could not build module 'Foundation'
+ 6 | */
+ 7 | 
+ 8 | #import <Foundation/Foundation.h>
+   |         `- error: could not build module 'Foundation'
+ 9 | 
+10 | #import <CoreData/CoreDataDefines.h>
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:9: note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 49 | #import <AppKit/NSPasteboard.h>
+ 50 | #import <AppKit/AppKitDefines.h>
+ 51 | #import <CoreImage/CIColor.h>
+    |         `- note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 52 | 
+ 53 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/CoreImage.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CIFilterBuiltins.h"
+3 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.h:9:10: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.h:9:
+ 7 | #define COREIMAGE_H
+ 8 | 
+ 9 | #include <CoreImage/CoreImageDefines.h>
+   |          `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.h:9:
+10 | 
+11 | #include <CoreImage/CIVector.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImageDefines.h:19:9: error: could not build module 'Foundation'
+17 | #include <CoreGraphics/CoreGraphics.h>
+18 | #ifdef __OBJC__
+19 | #import <Foundation/Foundation.h>
+   |         `- error: could not build module 'Foundation'
+20 | #endif
+21 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:9: note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 49 | #import <AppKit/NSPasteboard.h>
+ 50 | #import <AppKit/AppKitDefines.h>
+ 51 | #import <CoreImage/CIColor.h>
+    |         `- note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 52 | 
+ 53 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:9: note: while building module 'CoreVideo' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:
+ 13 | #import <Foundation/Foundation.h>
+ 14 | #import <CoreImage/CoreImageDefines.h>
+ 15 | #import <CoreVideo/CoreVideo.h>
+    |         `- note: while building module 'CoreVideo' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:
+ 16 | #import <ImageIO/ImageIO.h>
+ 17 | 
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/CoreVideo.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CVHostTime.h"
+3 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CoreVideo.h:29:10: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CoreVideo.h:29:
+27 | 
+28 | #include <CoreVideo/CVBuffer.h>
+29 | #include <CoreVideo/CVPixelBuffer.h>
+   |          `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CoreVideo.h:29:
+30 | #include <CoreVideo/CVPixelBufferPool.h>
+31 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBuffer.h:23:10: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBuffer.h:23:
+ 21 | #include <AvailabilityMacros.h>
+ 22 | 
+ 23 | #include <CoreVideo/CVImageBuffer.h>
+    |          `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBuffer.h:23:
+ 24 | #include <CoreFoundation/CFArray.h>
+ 25 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVImageBuffer.h:29:10: error: could not build module 'ApplicationServices'
+ 27 | #else
+ 28 | #if __has_include(<ApplicationServices/ApplicationServices.h>)
+ 29 | #include <ApplicationServices/ApplicationServices.h>
+    |          `- error: could not build module 'ApplicationServices'
+ 30 | #endif
+ 31 | #endif
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:9: note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 49 | #import <AppKit/NSPasteboard.h>
+ 50 | #import <AppKit/AppKitDefines.h>
+ 51 | #import <CoreImage/CIColor.h>
+    |         `- note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 52 | 
+ 53 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:9: note: while building module 'CoreVideo' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:
+ 13 | #import <Foundation/Foundation.h>
+ 14 | #import <CoreImage/CoreImageDefines.h>
+ 15 | #import <CoreVideo/CoreVideo.h>
+    |         `- note: while building module 'CoreVideo' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:
+ 16 | #import <ImageIO/ImageIO.h>
+ 17 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferIOSurface.h:31:10: note: while building module 'IOSurface' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferIOSurface.h:31:
+29 | #else
+30 | #if __has_include(<IOSurface/IOSurface.h>)
+31 | #include <IOSurface/IOSurface.h>
+   |          `- note: while building module 'IOSurface' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferIOSurface.h:31:
+32 | #define COREVIDEO_INCLUDED_IOSURFACE_HEADER_FILE 1
+33 | #endif
+
+<module-includes>:4:9: note: in file included from <module-includes>:4:
+2 | #import "Headers/IOSurfaceAPI.h"
+3 | #import "Headers/IOSurfaceBase.h"
+4 | #import "Headers/IOSurfaceObjC.h"
+  |         `- note: in file included from <module-includes>:4:
+5 | #import "Headers/IOSurfaceRef.h"
+6 | #import "Headers/IOSurfaceTypes.h"
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOSurface.framework/Headers/IOSurfaceObjC.h:16:9: error: could not build module 'Foundation'
+ 14 | #import <IOSurface/IOSurfaceTypes.h>
+ 15 | #import <IOSurface/IOSurfaceRef.h>
+ 16 | #import <Foundation/Foundation.h>
+    |         `- error: could not build module 'Foundation'
+ 17 | 
+ 18 | NS_ASSUME_NONNULL_BEGIN
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:9: note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 49 | #import <AppKit/NSPasteboard.h>
+ 50 | #import <AppKit/AppKitDefines.h>
+ 51 | #import <CoreImage/CIColor.h>
+    |         `- note: while building module 'CoreImage' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSColor.h:51:
+ 52 | 
+ 53 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:9: note: while building module 'CoreVideo' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:
+ 13 | #import <Foundation/Foundation.h>
+ 14 | #import <CoreImage/CoreImageDefines.h>
+ 15 | #import <CoreVideo/CoreVideo.h>
+    |         `- note: while building module 'CoreVideo' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CIImage.h:15:
+ 16 | #import <ImageIO/ImageIO.h>
+ 17 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVMetalTextureCache.h:41:9: note: while building module 'Metal' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVMetalTextureCache.h:41:
+ 39 | /* CVMetalTextureCacheRef is only available to Objective C code */
+ 40 | #if defined(__OBJC__) && COREVIDEO_SUPPORTS_METAL
+ 41 | #import <Metal/MTLPixelFormat.h>
+    |         `- note: while building module 'Metal' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CVMetalTextureCache.h:41:
+ 42 | 
+ 43 | @protocol MTLDevice;
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Metal.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.h:9:9: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.h:9:
+ 7 | 
+ 8 | #import <Metal/MTLDefines.h>
+ 9 | #import <Metal/MTLTypes.h>
+   |         `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.h:9:
+10 | #import <Metal/MTLBlitCommandEncoder.h>
+11 | #import <Metal/MTLAllocation.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/MTLTypes.h:8:9: error: could not build module 'Foundation'
+  6 | //
+  7 | 
+  8 | #import <Foundation/Foundation.h>
+    |         `- error: could not build module 'Foundation'
+  9 | #import <Metal/MTLDefines.h>
+ 10 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSImageView.h:12:9: note: while building module 'Symbols' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSImageView.h:12:
+ 10 | #import <AppKit/NSMenu.h>
+ 11 | #import <AppKit/AppKitDefines.h>
+ 12 | #import <Symbols/NSSymbolEffect.h>
+    |         `- note: while building module 'Symbols' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSImageView.h:12:
+ 13 | 
+ 14 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Symbols.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Symbols.framework/Headers/Symbols.h:8:9: error: could not build module 'Foundation'
+ 6 | //
+ 7 | 
+ 8 | #import <Foundation/Foundation.h>
+   |         `- error: could not build module 'Foundation'
+ 9 | #import <Symbols/NSSymbolEffect.h>
+10 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:9: note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+11 | 
+12 | #import <Foundation/Foundation.h>
+13 | #import <AppKit/AppKit.h>
+   |         `- note: while building module 'AppKit' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h:13:
+14 | #import <CoreData/CoreData.h>
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSOpenGLLayer.h:11:9: note: while building module 'QuartzCore' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSOpenGLLayer.h:11:
+ 9 | #import <AppKit/NSOpenGL.h>
+10 | #import <AppKit/AppKitDefines.h>
+11 | #import <QuartzCore/CAOpenGLLayer.h>
+   |         `- note: while building module 'QuartzCore' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AppKit.framework/Headers/NSOpenGLLayer.h:11:
+12 | 
+13 | NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/QuartzCore.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h:17:10: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h:17:
+15 | #endif
+16 | 
+17 | #include <QuartzCore/CoreAnimation.h>
+   |          `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h:17:
+18 | 
+19 | #endif /* QUARTZCORE_H */
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/CoreAnimation.h:10:10: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/CoreAnimation.h:10:
+ 8 | 
+ 9 | #include <QuartzCore/CABase.h>
+10 | #include <QuartzCore/CATransform3D.h>
+   |          `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/CoreAnimation.h:10:
+11 | 
+12 | #ifdef __OBJC__
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/CATransform3D.h:12:9: error: could not build module 'Foundation'
+ 10 | 
+ 11 | #ifdef __OBJC__
+ 12 | #import <Foundation/NSValue.h>
+    |         `- error: could not build module 'Foundation'
+ 13 | #endif
+ 14 | 
+
+main.swift:1:8: error: could not build Objective-C module 'Cocoa'
+  1 | import Cocoa
+    |        `- error: could not build Objective-C module 'Cocoa'
+  2 | import SwiftUI
+  3 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h:8:9: note: while building module 'Foundation' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h:8:
+ 6 | */
+ 7 | 
+ 8 | #import <Foundation/Foundation.h>
+   |         `- note: while building module 'Foundation' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h:8:
+ 9 | 
+10 | #import <CoreData/CoreDataDefines.h>
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Foundation.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/NSDebug.h"
+3 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:9: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:
+ 92 | #import <Foundation/NSURLCredential.h>
+ 93 | #import <Foundation/NSURLCredentialStorage.h>
+ 94 | #import <Foundation/NSURLError.h>
+    |         `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:
+ 95 | #import <Foundation/NSURLProtectionSpace.h>
+ 96 | #import <Foundation/NSURLProtocol.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSURLError.h:15:9: error: could not build module 'CoreServices'
+ 13 | #endif
+ 14 | #else
+ 15 | #import <CoreServices/CoreServices.h>
+    |         `- error: could not build module 'CoreServices'
+ 16 | #endif
+ 17 | 
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/CoreData.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CoreData_CloudKit.h"
+3 | #import "Headers/NSPersistentCloudKitContainer_Sharing.h"
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h:8:9: error: could not build module 'Foundation'
+ 6 | */
+ 7 | 
+ 8 | #import <Foundation/Foundation.h>
+   |         `- error: could not build module 'Foundation'
+ 9 | 
+10 | #import <CoreData/CoreDataDefines.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreData.framework/Modules/CoreData.swiftmodule/arm64e-apple-macos.swiftinterface:6:19: error: could not build Objective-C module 'CoreData'
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+   5 | import Combine
+   6 | @_exported import CoreData
+     |                   `- error: could not build Objective-C module 'CoreData'
+   7 | import Foundation
+   8 | import Swift
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface:7:8: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    5 | import Builtin
+    6 | import Combine
+    7 | import CoreFoundation
+      |        `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    8 | import Darwin
+    9 | import Dispatch
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/SwiftUI.framework/Modules/SwiftUI.swiftmodule/arm64e-apple-macos.swiftinterface:6:8: error: failed to build module 'CoreData'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+    5 | import Combine
+    6 | import CoreData
+      |        `- error: failed to build module 'CoreData'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    7 | import CoreFoundation
+    8 | @_exported import CoreGraphics
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  1 | // swift-interface-format-version: 1.0
+    | `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  2 | // swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+  3 | // swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  1 | // swift-interface-format-version: 1.0
+    | `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  2 | // swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+  3 | // swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreTransferable.framework/Headers/CoreTransferable.h: 0:
+<module-includes>: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSURLError.h: 0:
+<module-includes>: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreTransferable.framework/Headers/CoreTransferable.h: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreTransferable.framework/Modules/CoreTransferable.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface:7:8: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    5 | import Builtin
+    6 | import Combine
+    7 | import CoreFoundation
+      |        `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    8 | import Darwin
+    9 | import Dispatch
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/UniformTypeIdentifiers.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  1 | // swift-interface-format-version: 1.0
+    | `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  2 | // swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+  3 | // swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  1 | // swift-interface-format-version: 1.0
+    | `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  2 | // swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+  3 | // swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/DeveloperToolsSupport.framework/Modules/DeveloperToolsSupport.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/DeveloperToolsSupport.framework/Modules/DeveloperToolsSupport.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/OSLog.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/AXFoundation.h:11:9: note: while building module 'Foundation' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/AXFoundation.h:11:
+ 9 | 
+10 | #if defined(__OBJC__) || defined(__swift__)
+11 | #import <Foundation/Foundation.h>
+   |         `- note: while building module 'Foundation' imported from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/AXFoundation.h:11:
+12 | #endif
+13 | 
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Foundation.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/NSDebug.h"
+3 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:9: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:
+ 92 | #import <Foundation/NSURLCredential.h>
+ 93 | #import <Foundation/NSURLCredentialStorage.h>
+ 94 | #import <Foundation/NSURLError.h>
+    |         `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:94:
+ 95 | #import <Foundation/NSURLProtectionSpace.h>
+ 96 | #import <Foundation/NSURLProtocol.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSURLError.h:15:9: error: could not build module 'CoreServices'
+ 13 | #endif
+ 14 | #else
+ 15 | #import <CoreServices/CoreServices.h>
+    |         `- error: could not build module 'CoreServices'
+ 16 | #endif
+ 17 | 
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/Accessibility.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/Accessibility.h:8:9: note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/Accessibility.h:8:
+ 6 | //
+ 7 | 
+ 8 | #import <Accessibility/AXFoundation.h>
+   |         `- note: in file included from /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/Accessibility.h:8:
+ 9 | #import <Accessibility/AXAudiograph.h>
+10 | #import <Accessibility/AXBrailleMap.h>
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Headers/AXFoundation.h:11:9: error: could not build module 'Foundation'
+ 9 | 
+10 | #if defined(__OBJC__) || defined(__swift__)
+11 | #import <Foundation/Foundation.h>
+   |         `- error: could not build module 'Foundation'
+12 | #endif
+13 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Accessibility.framework/Modules/Accessibility.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/SwiftUICore.framework/Modules/SwiftUICore.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreTransferable.framework/Headers/CoreTransferable.h: 0:
+<module-includes>: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSURLError.h: 0:
+<module-includes>: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreTransferable.framework/Headers/CoreTransferable.h: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreTransferable.framework/Modules/CoreTransferable.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap:13:8: error: redefinition of module 'SwiftBridging'
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- error: redefinition of module 'SwiftBridging'
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap:13:8: note: previously defined here
+11 | //===----------------------------------------------------------------------===//
+12 | 
+13 | module SwiftBridging {
+   |        `- note: previously defined here
+14 |     header "bridging"
+15 | 
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface:7:8: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    5 | import Builtin
+    6 | import Combine
+    7 | import CoreFoundation
+      |        `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+    8 | import Darwin
+    9 | import Dispatch
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/UniformTypeIdentifiers.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  1 | // swift-interface-format-version: 1.0
+    | `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  2 | // swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+  3 | // swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  1 | // swift-interface-format-version: 1.0
+    | `- error: failed to build module 'CoreFoundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)', while this compiler is 'Apple Swift version 6.2.4 effective-5.10 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)'). Please select a toolchain which matches the SDK.
+  2 | // swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.2 clang-1700.6.3.2)
+  3 | // swift-module-flags: -target arm64e-apple-macos26.2 -target-variant arm64e-apple-ios26.2-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCoreFoundation -swift-version 5 -enforce-exclusivity=unchecked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2401 -module-name CoreFoundation
+
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/DeveloperToolsSupport.framework/Modules/DeveloperToolsSupport.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreGraphics.framework/Modules/CoreGraphics.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/module.modulemap: 0:
+/Library/Developer/CommandLineTools/usr/include/swift/bridging.modulemap: 0:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:

@@ -1,0 +1,26 @@
+{
+  "name": "prompt-optimizer-mcp",
+  "version": "1.0.0",
+  "description": "前后端开发提示词优化 MCP 服务器 — 将粗略的开发需求描述转化为高质量的 AI 编码提示词",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "prompt-optimizer-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "prompt",
+    "optimizer",
+    "fullstack",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT"
+}
