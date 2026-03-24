@@ -84,6 +84,9 @@
     self.window.backgroundColor = [NSColor colorWithWhite:0.0 alpha:self.bgAlpha];
     self.window.hasShadow = NO;
     
+    // 固定在所有屏幕空间，不随桌面切换而移动
+    self.window.collectionBehavior = NSWindowCollectionBehaviorCanJoinAllSpaces | NSWindowCollectionBehaviorStationary | NSWindowCollectionBehaviorTransient;
+    
     self.window.level = NSMainMenuWindowLevel + 2;
     [NSColorPanel sharedColorPanel].level = NSMainMenuWindowLevel + 3;
     
